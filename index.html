@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tic Tac Toe</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='reset.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <script src='script.js' defer></script>
+</head>
+<body>
+    
+
+        <form id="playersForm" class="playersForm">
+            <label for="inputName1">Player 1 name
+                <input type="text" id="inputName1" placeHolder="Enter P1 name">
+            </label>
+            <label for="symbolSelect">Player 1 mark
+                <select id="symbolSelect">
+                    <option value="X">X</option>
+                    <option value="O">O</option>
+                </select>
+            </label>
+            <label for="inputName2">Player 2 name
+                <input type="text" id="inputName2" placeHolder="Enter P2 name">
+            </label>
+            <button type="submit">GO!</button>
+        </form>
+        <div id="player1Display" class="playerDisplay">
+            <p id="p1Name">Player 1</p>
+            <p id="p1Symbol"></p>
+         </div>
+        <div id="boardAndStart">
+            <button type="button" id="startButton">Start new game</button>
+            <div id="gameBoard"></div>
+        </div>
+        <div id="player2Display" class="playerDisplay">
+            <p id="p2Name">Player 2</p>
+            <p id="p2Symbol"></p>
+         </div>
+
+    
+</body>
+</html>
