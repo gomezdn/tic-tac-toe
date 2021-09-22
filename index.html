@@ -13,8 +13,10 @@
     
 
         <form id="playersForm" class="playersForm">
+
+            <span id="closeFormButton">X</span>
             <label for="inputName1">Player 1 name
-                <input type="text" id="inputName1" placeHolder="Enter P1 name">
+                <input type="text" id="inputName1" placeHolder="Enter P1 name" required>
             </label>
             <label for="symbolSelect">Player 1 mark
                 <select id="symbolSelect">
@@ -23,21 +25,24 @@
                 </select>
             </label>
             <label for="inputName2">Player 2 name
-                <input type="text" id="inputName2" placeHolder="Enter P2 name">
+                <input type="text" id="inputName2" placeHolder="Enter P2 name" required>
             </label>
             <button type="submit">GO!</button>
         </form>
-        <div id="player1Display" class="playerDisplay">
-            <p id="p1Name">Player 1</p>
-            <p id="p1Symbol"></p>
+
+        <div id="player1Display" class="playerDisplayDiv">
+            <p id="p1Name" class="displayName">Player 1</p>
+            <p id="p1Symbol" class="displaySymbol"></p>
          </div>
+
         <div id="boardAndStart">
-            <button type="button" id="startButton">Start new game</button>
+            <button type="button" id="newGameButton">Start new game</button>
             <div id="gameBoard"></div>
         </div>
-        <div id="player2Display" class="playerDisplay">
-            <p id="p2Name">Player 2</p>
-            <p id="p2Symbol"></p>
+
+        <div id="player2Display" class="playerDisplayDiv">
+            <p id="p2Name" class="displayName">Player 2</p>
+            <p id="p2Symbol" class="displaySymbol"></p>
          </div>
 
     
