@@ -25,7 +25,7 @@ const DisplayController = (() => {
     const gameBoardNode = document.querySelector("#gameBoard");
     let gameBoardDivs;
     let currentPlayer;
-    let winnerRows = "012345678036147258048246"
+    let winnerRows = "012 345 678 036 147 258 048 246"
 
     const movingBackground = (() => {
         const xAndO = ["X", "O"]
@@ -66,13 +66,19 @@ const DisplayController = (() => {
         congratsDisplay.style.visibility = "visible"
     }
     const checkForWinner = () => {
-        if (winnerRows.indexOf(`${Players.player1.mark}`.repeat(3)) != -1) {
+        let mark1 = new RegExp(`${Players.player1.mark.repeat(3)}`)
+        let mark2 = new RegExp(`${Players.player2.mark.repeat(3)}`)
+        if (mark1.test(winnerRows)) {
             announceWinner(Players.player1)
-            winnerRows = "012345678036147258048246"
+            winnerRows = "012 345 678 036 147 258 048 246"
             return;
-        } else if(winnerRows.indexOf(`${Players.player2.mark}`.repeat(3)) != -1) {
+        } else if(mark2.test(winnerRows)) {
             announceWinner(Players.player2)
-            winnerRows = "012345678036147258048246"
+            winnerRows = "012 345 678 036 147 258 048 246"
+            return;
+        } else if (!/[0-9]/.test(winnerRows)) {
+            document.getElementById("congratsText").innerText = "It's a tie!"
+            congratsDisplay.style.visibility = "visible";
             return;
         }
 

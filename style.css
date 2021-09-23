@@ -151,3 +151,9 @@ body {
 #winnerName {
     color: rgb(190, 94, 94);
 }
+
+@media (max-width: 400px) {
+    body {
+        flex-direction: column;
+    }
+}
