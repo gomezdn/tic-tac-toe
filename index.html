@@ -10,11 +10,15 @@
     <script src='script.js' defer></script>
 </head>
 <body>
-    
+        
+        <div id="congratsDisplay" class="congratsDisplay">
+            <span id="closeCongrats" class="closeCongrats">X</span>
+            <span id="congratsText">Congrats <span id="winnerName"></span>! You won</span>
+        </div>
 
         <form id="playersForm" class="playersForm">
 
-            <span id="closeFormButton">X</span>
+            <span id="closeFormButton" class="closeFormButton">X</span>
             <label for="inputName1">Player 1 name
                 <input type="text" id="inputName1" placeHolder="Enter P1 name" required>
             </label>
