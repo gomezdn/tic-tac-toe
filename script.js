@@ -25,7 +25,7 @@ const DisplayController = (() => {
     const gameBoardNode = document.querySelector("#gameBoard");
     let gameBoardDivs;
     let currentPlayer;
-    let winnerRows = "012 345 678 036 147 258 048 246"
+    let winnerRows;
 
     const movingBackground = (() => {
         const xAndO = ["X", "O"]
@@ -55,6 +55,7 @@ const DisplayController = (() => {
             div.classList.add("gameDiv");
             div.innerText = cell;
             div.setAttribute("index", `${index}`)
+            div.setAttribute("id", `${index}`)
             gameBoardNode.appendChild(div)
         })
         gameBoardDivs = gameBoardNode.querySelectorAll("div")
@@ -62,7 +63,7 @@ const DisplayController = (() => {
     
     const announceWinner = (winner) => {
         
-        document.getElementById("winnerName").innerText = winner.name;
+        document.querySelector("#winnerName").innerText = winner.name;
         congratsDisplay.style.visibility = "visible"
     }
     const checkForWinner = () => {
@@ -79,18 +80,19 @@ const DisplayController = (() => {
         } else if (!/[0-9]/.test(winnerRows)) {
             document.getElementById("congratsText").innerText = "It's a tie!"
             congratsDisplay.style.visibility = "visible";
+            winnerRows = "012 345 678 036 147 258 048 246"
             return;
         }
 
     }
     const makeBoardPlayable = () => {
+        winnerRows = "012 345 678 036 147 258 048 246"
         gameBoardDivs.forEach(div => div.addEventListener("click", () => {
             if (!Gameboard.cells[+div.getAttribute("index")]) {
                 Gameboard.cells[+div.getAttribute("index")] = currentPlayer.mark;
                 div.innerText = Gameboard.cells[+div.getAttribute("index")];
                 winnerRows = winnerRows.replaceAll(`${div.getAttribute("index")}`, currentPlayer.mark);
                 checkForWinner();
-                console.log(winnerRows)
                 toggleCurrentPlayer();
             }
         }))
@@ -105,14 +107,23 @@ const DisplayController = (() => {
         name2.innerText = Players.player2.name;
         mark1.innerText = Players.player1.mark;
         mark2.innerText = Players.player2.mark;
-        Gameboard.cells.forEach(cell => cell = "")
         clearInterval(movingBackground);
+        clearBoardAndDisplay();
         displayBoard();
         makeBoardPlayable();
         currentPlayer = Players.player1;
     }
 
-    return {displayBoard, makeBoardPlayable, newGame, congratsDisplay}
+    const playAgain = () => {
+        clearBoardAndDisplay()
+        displayBoard();
+        makeBoardPlayable();
+        currentPlayer = Players.player1;
+        document.querySelector("#winnerName").innerText = "";
+        congratsDisplay.style.visibility = "hidden";
+    }
+
+    return {displayBoard, makeBoardPlayable, newGame, playAgain, congratsDisplay}
 })()
 
 const Interface = (() => {
@@ -122,7 +133,7 @@ const Interface = (() => {
     const closeFormButton = document.querySelector("#closeFormButton");
     const body = document.body;
     const closeCongrats = document.querySelector("#closeCongrats");
-   
+    const playAgainButton = document.querySelector("#playAgainButton")
 
     const openForm = () => {
         playersForm.style.transition = "all 0.5s";
@@ -140,13 +151,9 @@ const Interface = (() => {
         playersForm.reset();
     }
 
-    const closeCongratsDisplay = () => {
-        DisplayController.congratsDisplay.style.visibility = "hidden";
-
-    }
-
     newGameButton.addEventListener("click", openForm)
     closeFormButton.addEventListener("click", closeForm)
+    playAgainButton.addEventListener("click", DisplayController.playAgain)
 
     playersForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -158,7 +165,7 @@ const Interface = (() => {
     })
 
     closeCongrats.addEventListener("click", () => {
-        DisplayController.congratsDisplay.style.visibility = "hidden"
+        DisplayController.congratsDisplay.style.visibility = "hidden";
     })
     
 })()
