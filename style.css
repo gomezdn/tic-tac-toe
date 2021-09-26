@@ -126,8 +126,6 @@ body {
 
 .congratsDisplay {
     visibility: hidden;
-    max-width: 100%;
-    height: 50%;
     background-color: rgb(110, 177, 185);
     position: absolute;
     display: flex;
@@ -148,9 +146,11 @@ body {
 #congratsText {
     font-size: 2em;
     text-align: center;
+
 }
 
 #winnerName {
+    justify-self: flex-start;
     color: rgb(190, 94, 94);
 }
 
